@@ -32,5 +32,19 @@ services:
     ports:
       - "8080:8080"
 
+  grafana:
+    image: grafana/grafana:10.2.2
+    container_name: metrics-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+
 volumes:
   db_data:
+  grafana_data:
