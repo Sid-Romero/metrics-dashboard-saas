@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: metrics-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: metrics
+      POSTGRES_PASSWORD: metrics
+      POSTGRES_DB: metricsdb
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U metrics -d metricsdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: metrics-backend
+    environment:
+      PORT: "8080"
+      DATABASE_URL: "postgres://metrics:metrics@db:5432/metricsdb?sslmode=disable"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:
