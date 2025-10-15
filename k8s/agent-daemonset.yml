@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: metrics-agent
+  namespace: metrics
+spec:
+  selector:
+    matchLabels:
+      app: metrics-agent
+  template:
+    metadata:
+      labels:
+        app: metrics-agent
+    spec:
+      containers:
+      - name: metrics-agent
+        image: sidya18/metrics-agent:latest
+        env:
+        - name: BACKEND_URL
+          value: "http://metrics-backend:8080/metrics"
