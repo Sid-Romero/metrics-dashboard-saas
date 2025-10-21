@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  metrics-saas:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-10-21T17:31:41.826406473+02:00"
+    description: A metrics dashboard SaaS (DB + Backend + Agent + Grafana)
+    digest: eb27439c66330db321875b8bb869a7de914e3b970c6a550c989d30429303c09d
+    name: metrics-saas
+    type: application
+    urls:
+    - https://github.com/Sid-Romero/metrics-dashboard-SaaS/metrics-saas-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-10-21T17:31:41.82306497+02:00"
