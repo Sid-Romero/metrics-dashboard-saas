@@ -9,6 +9,6 @@ entries:
     name: metrics-saas
     type: application
     urls:
-    - https://github.com/Sid-Romero/metrics-dashboard-SaaS/metrics-saas-0.1.0.tgz
+    - https://sid-romero.github.io/metrics-dashboard-saas
     version: 0.1.0
 generated: "2025-10-21T17:31:41.82306497+02:00"
