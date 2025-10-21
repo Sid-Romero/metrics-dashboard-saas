@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: metrics-db-cleaner
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: db-cleaner
+              image: postgres:15
+              command: ["psql"]
+              args:
+                - "-h"
+                - "metrics-db"
+                - "-U"
+                - "metrics"
+                - "-d"
+                - "metricsdb"
+                - "-c"
+                - "DELETE FROM metrics WHERE ts < NOW() - interval '{{ .Values.retention }}';"
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: metrics-secrets
+                      key: POSTGRES_PASSWORD
+          restartPolicy: OnFailure

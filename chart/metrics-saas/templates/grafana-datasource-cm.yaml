@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: metrics
+data:
+  datasource.yml: |
+    apiVersion: 1
+    datasources:
+      - name: PostgreSQL
+        type: postgres
+        access: proxy
+        url: metrics-db:5432
+        database: metricsdb
+        user: metrics
+        secureJsonData:
+          password: metrics
+        isDefault: true
+        jsonData:
+          sslmode: "disable"

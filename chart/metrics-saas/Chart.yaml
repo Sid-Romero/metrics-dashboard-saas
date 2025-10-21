@@ -1,0 +1,6 @@
+apiVersion: v2
+name: metrics-saas
+description: A metrics dashboard SaaS (DB + Backend + Agent + Grafana)
+type: application
+version: 0.1.0
+appVersion: "1.0"

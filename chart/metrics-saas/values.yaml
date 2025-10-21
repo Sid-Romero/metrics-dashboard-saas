@@ -1,0 +1,21 @@
+namespace: metrics
+
+postgres:
+  user: metrics
+  password: metrics
+  db: metricsdb
+  storage: 1Gi
+
+backend:
+  image: sidya18/metrics-backend:latest
+  port: 8080
+
+agent:
+  image: sidya18/metrics-agent:latest
+
+grafana:
+  adminUser: admin
+  adminPassword: supersecret
+  port: 3000
+
+retention: 12 hours
